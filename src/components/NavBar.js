@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav'
 const NavBar = () => {
     return (
         <Navbar variant="dark" bg="dark">
-            <Navbar.Brand href="#">Tabinate</Navbar.Brand>
+            <Navbar.Brand href="/">Tabinate</Navbar.Brand>
             <Navbar.Toggle />
             <Nav>
                 <Nav.Link>Home</Nav.Link>
@@ -14,7 +14,7 @@ const NavBar = () => {
             </Nav>
             <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
-                Signed in as: <a href="#login">ME!</a>
+                Signed in as: <a href="#login">Guest</a>
                 </Navbar.Text>
             </Navbar.Collapse>
         </Navbar>
