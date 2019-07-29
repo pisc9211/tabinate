@@ -4,8 +4,12 @@ import Container from 'react-bootstrap/Container'
 
 import NavBar from './components/NavBar'
 import Tabs from './components/Tabs'
+import Landing from './components/Landing'
 
-function App() {
+import withFirebaseAuth from 'react-with-firebase-auth'
+import { providers, firebaseAppAuth } from './base'
+
+function App({user, signOut, signInWithGoogle}) {
   let [urls, updateUrls] = useState(['https://www.google.com', 'https://www.youtube.com']);
 
   let addUrl = (url) => {
@@ -22,13 +26,16 @@ function App() {
     e.preventDefault()
     updateUrls([...urls.slice(0, i), ...urls.slice(i+1)])
   }
-
+  console.log(user)
   return (
     <Container>
-      <NavBar/>
-      <Tabs urls={urls} openAll={openAll} addUrl={addUrl} deleteUrl={deleteUrl}/>
+      <NavBar user={user} signOut={signOut} signInWithGoogle={signInWithGoogle}/>
+      { user ? <Tabs urls={urls} openAll={openAll} addUrl={addUrl} deleteUrl={deleteUrl} user={user}/> : <Landing />}
     </Container>
   );
 }
 
-export default App;
+export default withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+})(App);
