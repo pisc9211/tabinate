@@ -1,5 +1,43 @@
 import React, {useState} from 'react'
 import CheckBox from './CheckBox'
+import styled from 'styled-components'
+
+const Div = styled.div`
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid blue;
+`
+
+const Form = styled.form`
+    margin: 1em;
+`
+
+const Input = styled.input`
+    width: 55%;
+    height: 2em;
+    border: 2px solid grey;
+    padding: 4px;
+
+    :focus {
+        border-color: teal;
+    }
+`
+
+const Button = styled.button`
+    height: 2em;
+    background-color: black;
+    border-radius: 4px;
+    color: white;
+`
+
+const UrlDiv = styled.div`
+    display: flex;
+    width: 70%;
+    margin: 2em;
+    justify-content: center;
+`
 
 const Tabs = ({urls, openAll, addUrl, deleteUrl}) => {
     let [url, updateUrl] = useState('')
@@ -22,16 +60,16 @@ const Tabs = ({urls, openAll, addUrl, deleteUrl}) => {
         openAll(getCheckedURL())
     }
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input value={url} onChange={handleOnChange} type="text" placeholder="add url"/>
-                <button>Add URL</button>
-            </form>
-            <form onSubmit={open}>
+        <Div>
+            <Form onSubmit={handleSubmit}>
+                <Input value={url} onChange={handleOnChange} type="text" placeholder="add url"/>
+                <Button>Add URL</Button>
+            </Form>
+            <UrlDiv onSubmit={open}>
                 {urls.map((url, i) => <CheckBox url={url} deleteUrl={deleteUrl} i={i} />)}
-                <button>Open</button>
-            </form>
-        </div>
+            </UrlDiv>
+            <button>Open</button>
+        </Div>
     )
 }
 

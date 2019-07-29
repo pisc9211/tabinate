@@ -3,13 +3,12 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
 const NavBar = ({user, signOut, signInWithGoogle}) => {
-    let username = user? user.displayName : 'Guest'
     return (
         <Navbar variant="dark" bg="dark">
             <Navbar.Brand href="/">Tabinate</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-start">
-                {user ? <Navbar.Text><img alt='user' style={{'width': '25px', 'border-radius': '50%'}} src={user.providerData[0].photoURL} />
+                {user ? <Navbar.Text><img alt='user' style={{'width': '25px', 'borderRadius': '50%'}} src={user.providerData[0].photoURL} />
                 </Navbar.Text> : null }
             </Navbar.Collapse>
             <Nav>
