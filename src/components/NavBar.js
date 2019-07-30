@@ -2,21 +2,18 @@ import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
-const NavBar = () => {
+const NavBar = ({user, signOut, signInWithGoogle}) => {
     return (
         <Navbar variant="dark" bg="dark">
             <Navbar.Brand href="/">Tabinate</Navbar.Brand>
             <Navbar.Toggle />
-            <Nav>
-                <Nav.Link>Home</Nav.Link>
-                <Nav.Link>Log In</Nav.Link>
-                <Nav.Link>Log Out</Nav.Link>
-            </Nav>
-            <Navbar.Collapse className="justify-content-end">
-                <Navbar.Text>
-                Signed in as: <a href="#login">Guest</a>
-                </Navbar.Text>
+            <Navbar.Collapse className="justify-content-start">
+                {user ? <Navbar.Text><img alt='user' style={{'width': '25px', 'borderRadius': '50%'}} src={user.providerData[0].photoURL} />
+                </Navbar.Text> : null }
             </Navbar.Collapse>
+            <Nav>
+                {user ? <Nav.Link onClick={signOut}>Log Out</Nav.Link> : <Nav.Link onClick={signInWithGoogle}>Log In</Nav.Link>}
+            </Nav>
         </Navbar>
     )
 }
