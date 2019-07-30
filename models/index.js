@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-mongoose.connect(`mongodb://${process.env.REACT_APP_MONGODB_USERNAME}:${process.env.REACT_APP_MONGODB_PASSWORD}@ds139705.mlab.com:39705/tabinate`, {
+mongoose.connect(`mongodb://${process.env.MONGODB_USERNAME || 'root'}:${process.env.MONGODB_PASSWORD || 'password123'}@ds139705.mlab.com:39705/tabinate`, {
   useNewUrlParser: true
 });
 
@@ -17,7 +17,7 @@ db.once('open', function () {
 
 let UrlSchema = new Schema({
   url: String,
-  checked: Boolean,
+  checked: {type: Boolean, default: true},
   date: {type: Date, default: Date.now()}
 })
 
@@ -41,9 +41,18 @@ let getUser = (uid) => {
   })
 }
 
+let addUrl = (data) => {
+  let {url, uid} = data
+  let urlz = new Url({
+    url: url
+  })
+  return User.update({uid: uid}, {$push: {urls: urlz}})
+}
+
 let Url = mongoose.model('Url', UrlSchema)
 let User = mongoose.model('User', UserSchema)
 
 module.exports.Url = Url
 module.exports.User = User
 module.exports.getUser = getUser
+module.exports.addUrl = addUrl

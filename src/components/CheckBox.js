@@ -63,7 +63,7 @@ const CheckBox = ({url, deleteUrl, i}) => {
                 <img className="mx-2" src={imgUrl}></img>
             </A>
             <Name>
-                {getDomain(url.match(/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/img).toString())}
+                {url ? getDomain(url.match(/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/img).toString()): null}
             </Name>
             
         </Div>

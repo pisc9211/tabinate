@@ -12,7 +12,7 @@ import axios from 'axios'
 
 
 function App({user, signOut, signInWithGoogle}) {
-  let [urls, updateUrls] = useState([{url: 'https://www.google.com',checked: true}, {url:'https://www.youtube.com', checked: true}]);
+  let [urls, updateUrls] = useState([]);
 
   let addUrl = (url) => {
     updateUrls([...urls, {url, checked: true}])
@@ -30,10 +30,9 @@ function App({user, signOut, signInWithGoogle}) {
   }
   
   useEffect(() => {
-    axios.get('/api/1234').then(d => console.log('useEffect',d))
+    axios.get('/api/1234').then(({data}) => updateUrls(data))
   }, [])
 
-  console.log('process.env', process.env)
   return (
     <Container>
       <NavBar user={user} signOut={signOut} signInWithGoogle={signInWithGoogle}/>
