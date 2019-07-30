@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-mongoose.connect(`mongodb://root:password123@ds139705.mlab.com:39705/tabinate`, {
+mongoose.connect(`mongodb://${process.env.REACT_APP_MONGODB_USERNAME}:${process.env.REACT_APP_MONGODB_PASSWORD}@ds139705.mlab.com:39705/tabinate`, {
   useNewUrlParser: true
 });
 

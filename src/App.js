@@ -33,6 +33,7 @@ function App({user, signOut, signInWithGoogle}) {
     axios.get('/api/1234').then(d => console.log('useEffect',d))
   }, [])
 
+  console.log('process.env', process.env)
   return (
     <Container>
       <NavBar user={user} signOut={signOut} signInWithGoogle={signInWithGoogle}/>

@@ -2,13 +2,13 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 
 const config = {
-    apiKey: "AIzaSyC64IGxJpId-a_QVdXuKsgPCfFT35K7y1E",
-    authDomain: "tabinate-2d51f.firebaseapp.com",
-    databaseURL: "https://tabinate-2d51f.firebaseio.com",
-    projectId: "tabinate-2d51f",
+    apiKey: process.env.REACT_APP_FB_APIKEY,
+    authDomain: process.env.REACT_APP_FB_AUTHDOMAIN,
+    databaseURL: process.env.REACT_APP_FB_DATABASEURL,
+    projectId: process.env.REACT_APP_FB_PROJECTID,
     storageBucket: "",
-    messagingSenderId: "593242313861",
-    appId: "1:593242313861:web:15020f076e7c0a6f"
+    messagingSenderId: process.env.REACT_APP_FB_MESSAGINGSENDERID,
+    appId: process.env.REACT_APP_FB_APPID
   };
 
 const firebaseApp = firebase.initializeApp(config)
