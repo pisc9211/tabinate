@@ -52,6 +52,7 @@ const CheckBox = ({url, deleteUrl, i}) => {
 
     let imgUrl = `http://s2.googleusercontent.com/s2/favicons?domain_url=${url}`
 
+    // ********* Need to change the url object checked property when clicking the input **********
     return (
         <Div className='mx-2 my-2'>
             <Close onClick={handleOnChange}>
