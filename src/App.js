@@ -11,10 +11,10 @@ import { providers, firebaseAppAuth } from './base'
 
 
 function App({user, signOut, signInWithGoogle}) {
-  let [urls, updateUrls] = useState(['https://www.google.com', 'https://www.youtube.com']);
+  let [urls, updateUrls] = useState([{url: 'https://www.google.com',checked: true}, {url:'https://www.youtube.com', checked: true}]);
 
   let addUrl = (url) => {
-    updateUrls([...urls, url])
+    updateUrls([...urls, {url, checked: true}])
   }
 
   let openAll = (urlArr) => {

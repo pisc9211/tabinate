@@ -49,13 +49,14 @@ const CheckBox = ({url, deleteUrl, i}) => {
         e.preventDefault()
         updateChecked(!checked)
     }
+
     let imgUrl = `http://s2.googleusercontent.com/s2/favicons?domain_url=${url}`
-    let box = true ? '&#9633;' :  '&#9745;'
+
     return (
-        <Div className='mx-2'>
-            <Close>
-                <input type="checkbox"/>
-                <span class="checkmark"></span>
+        <Div className='mx-2 my-2'>
+            <Close onClick={handleOnChange}>
+                <input value={url} onClick='return false' checked={checked} className="check" type="checkbox"/>
+                <span className="checkmark"></span>
             </Close>
             <A>
                 <img className="mx-2" src={imgUrl}></img>

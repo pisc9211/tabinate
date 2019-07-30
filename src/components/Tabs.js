@@ -37,6 +37,16 @@ const UrlDiv = styled.div`
     width: 70%;
     margin: 2em;
     justify-content: center;
+    flex-wrap: wrap;
+    align-self: center;
+`
+
+const OpenButton = styled.button`
+    width: 30%;
+    margin: 0 auto;
+    height: 50px;
+    border-radius: 15px;
+    background-color: #50c878;
 `
 
 const Tabs = ({urls, openAll, addUrl, deleteUrl}) => {
@@ -53,6 +63,7 @@ const Tabs = ({urls, openAll, addUrl, deleteUrl}) => {
     }
     let getCheckedURL = () => {
         let arr = document.getElementsByClassName('check')
+        console.log('checkedurl', arr)
         return [...arr].filter(el => el.checked).map(el => el.value)
     }
     let open = (e) => {
@@ -65,10 +76,10 @@ const Tabs = ({urls, openAll, addUrl, deleteUrl}) => {
                 <Input value={url} onChange={handleOnChange} type="text" placeholder="add url"/>
                 <Button>Add URL</Button>
             </Form>
+            <OpenButton onClick={open}>Open Checked</OpenButton>
             <UrlDiv onSubmit={open}>
-                {urls.map((url, i) => <CheckBox url={url} deleteUrl={deleteUrl} i={i} />)}
+                {urls.map((url, i) => <CheckBox url={url.url} deleteUrl={deleteUrl} i={i} />)}
             </UrlDiv>
-            <button>Open</button>
         </Div>
     )
 }
