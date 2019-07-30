@@ -11,7 +11,7 @@ const Div = styled.div`
 `
 
 const Form = styled.form`
-    margin: 1em;
+    margin: 1em; 
 `
 
 const Input = styled.input`

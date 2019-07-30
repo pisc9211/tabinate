@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Container from 'react-bootstrap/Container'
 
@@ -8,6 +8,7 @@ import Landing from './components/Landing'
 
 import withFirebaseAuth from 'react-with-firebase-auth'
 import { providers, firebaseAppAuth } from './base'
+import axios from 'axios'
 
 
 function App({user, signOut, signInWithGoogle}) {
@@ -27,7 +28,11 @@ function App({user, signOut, signInWithGoogle}) {
     e.preventDefault()
     updateUrls([...urls.slice(0, i), ...urls.slice(i+1)])
   }
-  console.log(user)
+  
+  useEffect(() => {
+    axios.get('/api/1234').then(d => console.log('useEffect',d))
+  }, [])
+
   return (
     <Container>
       <NavBar user={user} signOut={signOut} signInWithGoogle={signInWithGoogle}/>
