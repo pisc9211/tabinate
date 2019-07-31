@@ -9,4 +9,7 @@ let UrlSchema = new Schema({
 
 let Url = mongoose.model('Url', UrlSchema)
 
-export default Url
+module.exports = {
+  Url,
+  UrlSchema
+}

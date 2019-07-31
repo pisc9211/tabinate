@@ -49,7 +49,7 @@ const OpenButton = styled.button`
     background-color: #50c878;
 `
 
-const Tabs = ({urls, openAll, addUrl, deleteUrl}) => {
+const Tabs = ({urls, openAll, getUrls, addUrl, deleteUrl, uid}) => {
     let [url, updateUrl] = useState('')
 
     let handleOnChange = (e) => {
@@ -70,6 +70,7 @@ const Tabs = ({urls, openAll, addUrl, deleteUrl}) => {
         e.preventDefault()
         openAll(getCheckedURL())
     }
+    
     return (
         <Div>
             <Form onSubmit={handleSubmit}>
@@ -78,7 +79,7 @@ const Tabs = ({urls, openAll, addUrl, deleteUrl}) => {
             </Form>
             <OpenButton onClick={open}>Open Checked</OpenButton>
             <UrlDiv onSubmit={open}>
-                {urls && urls.length > 0 ? urls.map((url, i) => <CheckBox key={url.url} url={url.url} deleteUrl={deleteUrl} i={i} />) : 'No Urls Saved!!'}
+                {urls && urls.length > 0 ? urls.map((url, i) => <CheckBox key={url._id} getUrls={getUrls} url={url.url} deleteUrl={deleteUrl} i={i} uid={uid} _id={url._id} isChecked={url.checked}/>) : 'No Urls Saved!!'}
             </UrlDiv>
         </Div>
     )

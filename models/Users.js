@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
-const UrlSchema = require('./Url')
+const UrlSchema = require('./Url').UrlSchema
 
 let UserSchema = new Schema({
   uid: {
@@ -12,4 +12,4 @@ let UserSchema = new Schema({
 
 let User = mongoose.model('User', UserSchema)
 
-export default User
+module.exports = User

@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
 
 const Div = styled.div`
     width: 130px;
@@ -43,20 +44,28 @@ const Name = styled.div`
     padding: 0;
 `
 
-const CheckBox = ({url, deleteUrl, i}) => {
-    let [checked, updateChecked] = useState(true)
+const CheckBox = ({url, _id, getUrls, deleteUrl, i, uid, isChecked}) => {
+
     let handleOnChange = (e) => {
-        updateChecked(e.target.checked)
+        updateCheckMark(_id, e.target.checked)
+    }
+
+    let updateCheckMark = (id, checked) => {
+        console.log(id, checked, uid)
+        axios.post('/api/check', {
+            uid: uid,
+            urlId: id,
+            checked: checked
+        }).then(() => getUrls())
     }
 
     let imgUrl = `http://s2.googleusercontent.com/s2/favicons?domain_url=${url}`
 
-    // ********* Need to change the url object checked property when clicking the input **********
     return (
         <Div className='mx-2 my-2'>
             <Close>
-                <input value={url} onChange={handleOnChange} checked={checked} className="check" type="checkbox"/>
-                {/* <span className="checkmark"></span> */}
+                <input value={url} onChange={handleOnChange} checked={isChecked} className="check" type="checkbox"/>
+                <span className="checkmark"></span>
             </Close>
             <A>
                 <img className="mx-2" src={imgUrl}></img>
@@ -81,6 +90,5 @@ let getDomain = url => {
     }
     return url;
 }
-{/* <span onClick={handleOnChange}><input checked={checked}  className="check" value={url} type="checkbox"/>{url}</span><button className="mx-4" onClick={(e) => deleteUrl(e,i)}>Delete</button> */}
 
 export default CheckBox

@@ -15,9 +15,9 @@ function App({user, signOut, signInWithGoogle}) {
   let [urls, updateUrls] = useState([]);
 
   let addUrl = (url) => {
-    updateUrls([...urls, {url, checked: true}])
     axios.post(`/api/url`, {url, uid: user.uid})
-         .then(d => console.log('get back from post', d))
+         .then(() => getUrls())
+         .catch(err => console.error(err))
   }
 
   let openAll = (urlArr) => {
@@ -26,9 +26,12 @@ function App({user, signOut, signInWithGoogle}) {
     })
   }
 
-  let deleteUrl = (e, i) => {
-    e.preventDefault()
-    updateUrls([...urls.slice(0, i), ...urls.slice(i+1)])
+  let deleteUrl = (urlId) => {
+    // axios.delete('/api', {
+    //   uid: user.uid,
+    //   urlId
+    // }).then(() => getUrls())
+    //   .catch(err => console.error(err))
   }
 
   let getUrls = () => {
@@ -43,11 +46,11 @@ function App({user, signOut, signInWithGoogle}) {
     getUrls()
   }, [user])
 
-  console.log('user object from firebase', user)
   return (
     <Container>
       <NavBar user={user} signOut={signOut} signInWithGoogle={signInWithGoogle}/>
-      { user ? <Tabs urls={urls} openAll={openAll} addUrl={addUrl} deleteUrl={deleteUrl} user={user}/> : <Landing />}
+      <a href="https://www.reddit.com/r/nba" target="_blank">r/nba</a>
+      { user ? <Tabs urls={urls} openAll={openAll} getUrls={getUrls} addUrl={addUrl} deleteUrl={deleteUrl} uid={user.uid}/> : <Landing />}
     </Container>
   );
 }
