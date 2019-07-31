@@ -16,6 +16,8 @@ function App({user, signOut, signInWithGoogle}) {
 
   let addUrl = (url) => {
     updateUrls([...urls, {url, checked: true}])
+    axios.post(`/api/url`, {url, uid: user.uid})
+         .then(d => console.log('get back from post', d))
   }
 
   let openAll = (urlArr) => {
@@ -28,11 +30,20 @@ function App({user, signOut, signInWithGoogle}) {
     e.preventDefault()
     updateUrls([...urls.slice(0, i), ...urls.slice(i+1)])
   }
+
+  let getUrls = () => {
+    if (user) {
+      axios.get(`/api/${user.uid}`)
+           .then(({data}) => updateUrls(data[0].urls))
+           .catch(err => console.error(err))
+    }
+  }
   
   useEffect(() => {
-    axios.get('/api/1234').then(({data}) => updateUrls(data))
-  }, [])
+    getUrls()
+  }, [user])
 
+  console.log('user object from firebase', user)
   return (
     <Container>
       <NavBar user={user} signOut={signOut} signInWithGoogle={signInWithGoogle}/>

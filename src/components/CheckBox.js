@@ -46,8 +46,7 @@ const Name = styled.div`
 const CheckBox = ({url, deleteUrl, i}) => {
     let [checked, updateChecked] = useState(true)
     let handleOnChange = (e) => {
-        e.preventDefault()
-        updateChecked(!checked)
+        updateChecked(e.target.checked)
     }
 
     let imgUrl = `http://s2.googleusercontent.com/s2/favicons?domain_url=${url}`
@@ -55,9 +54,9 @@ const CheckBox = ({url, deleteUrl, i}) => {
     // ********* Need to change the url object checked property when clicking the input **********
     return (
         <Div className='mx-2 my-2'>
-            <Close onClick={handleOnChange}>
-                <input value={url} onClick='return false' checked={checked} className="check" type="checkbox"/>
-                <span className="checkmark"></span>
+            <Close>
+                <input value={url} onChange={handleOnChange} checked={checked} className="check" type="checkbox"/>
+                {/* <span className="checkmark"></span> */}
             </Close>
             <A>
                 <img className="mx-2" src={imgUrl}></img>
