@@ -5,7 +5,7 @@ const addUrl = require('../models').addUrl
 const deleteUrl = require('../models').deleteUrl
 const updateCheck = require('../models').updateCheck
 const axios = require('axios')
-
+const cheerio = require('cheerio')
 
 app.use(express.json())
 app.use(express.urlencoded({
@@ -35,11 +35,17 @@ app.delete('/api', (req, res) => {
   res.send('deleted!')
 })
 
-app.get('/title', (req, res) => {
+app.post('/title', (req, res) => {
   let url = req.body.url;
-  axios.get(url).then(d => 
-    { console.log(typeof d.data)
-      res.send(d.data)})
+  axios.get(url).then(d => {
+    // console.log(findTitle(d.data))
+    res.send(findTitle(d.data))
+  }).catch(e => res.send(e))
 })
+
+function findTitle(str) {
+  const $ = cheerio.load(str)
+  return $.html()
+}
 
 app.listen(4000, () => console.log(`listening to port 4000`))
