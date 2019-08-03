@@ -49,7 +49,6 @@ function App({user, signOut, signInWithGoogle}) {
   return (
     <Container>
       <NavBar user={user} signOut={signOut} signInWithGoogle={signInWithGoogle}/>
-      <a href="https://www.reddit.com/r/nba" target="_blank">r/nba</a>
       { user ? <Tabs urls={urls} openAll={openAll} getUrls={getUrls} addUrl={addUrl} deleteUrl={deleteUrl} uid={user.uid}/> : <Landing />}
     </Container>
   );

@@ -39,8 +39,7 @@ app.post('/title', async (req, res) => {
   let url = req.body.url;
   console.log('url', url)
   let title = await getTitlePup(url)
-  // res.send(title)
-  axios.get(url).then(d => res.send(d.data)).catch(e => res.send(e.message))
+  res.send(title)
 })
 
 
@@ -52,19 +51,9 @@ app.post('/title', async (req, res) => {
 async function getTitlePup(url) {
   const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
-  console.log('url in puppeteer', url)
   await page.goto(url, {waitUntil: 'networkidle0'})
-  await page.waitFor(5000)
-  const title = await page.evaluate(() => {
-      return document
-      // console.log('evaluate', document.getElementsByTagName('body'))
-      // console.log(titles)
-      // return 'this is the title'
-  })
-  
-  // console.log('title:', title);
+  const title = await page.title()
   await browser.close()
-  console.log('title: ', title)
   return title
 }
 
