@@ -18,8 +18,12 @@ app.get('/api/:uid', (req, res) => {
   // res.send(req.params.uid)
 })
 
-app.post('/api/url', (req, res) => {
-  addUrl(req.body)
+app.post('/api/url', async (req, res) => {
+  let title = await getTitlePup(req.body.url)
+  console.log('title from post', title)
+  let data = Object.assign({title}, req.body)
+  console.log('data from assigning', data)
+  addUrl(data)
     .then((d) => res.send('added url!'))
     .catch(err => res.send(err))
 })
@@ -45,7 +49,8 @@ app.post('/title', async (req, res) => {
 async function getTitlePup(url) {
   const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
-  await page.goto(url, {waitUntil: 'networkidle0'})
+  await page.goto(url)
+  await page.waitForSelector('title');
   const title = await page.title()
   await browser.close()
   return title

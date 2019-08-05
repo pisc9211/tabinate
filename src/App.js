@@ -10,12 +10,12 @@ import withFirebaseAuth from 'react-with-firebase-auth'
 import { providers, firebaseAppAuth } from './base'
 import axios from 'axios'
 
-
 function App({user, signOut, signInWithGoogle}) {
   let [urls, updateUrls] = useState([]);
 
-  let addUrl = (url) => {
-    axios.post(`/api/url`, {url, uid: user.uid})
+  let addUrl = async (url) => {
+    axios.post(`/api/url`, {url, uid: user.uid })
+         .then(d => console.log(d.data))
          .then(() => getUrls())
          .catch(err => console.error(err))
   }
@@ -39,6 +39,7 @@ function App({user, signOut, signInWithGoogle}) {
     if (user) {
       axios.get(`/api/${user.uid}`)
            .then(({data}) => updateUrls(data[0].urls))
+           .then(() => console.log(urls))
            .catch(err => console.error(err))
     }
   }
@@ -50,7 +51,7 @@ function App({user, signOut, signInWithGoogle}) {
   return (
     <div style={style}>
       <NavBar user={user} signOut={signOut} signInWithGoogle={signInWithGoogle}/>
-      { user ? <Tabs urls={urls} openAll={openAll} getUrls={getUrls} addUrl={addUrl} deleteUrl={deleteUrl} uid={user.uid} /> : <Landing />}
+      { user ? <Tabs urls={urls} openAll={openAll} getUrls={getUrls} addUrl={addUrl} deleteUrl={deleteUrl} uid={user.uid} /> : <Landing signInWithGoogle={signInWithGoogle}/>}
     </div>
   );
 }

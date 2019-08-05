@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import logo from '../images/tabinate.png'
+import signIn from '../images/btn_google_signin_dark_normal_web.png'
+import press from '../images/btn_google_signin_dark_pressed_web.png'
 
 const Jumbo = styled.div`
     display: flex;
@@ -24,7 +26,10 @@ const Message = styled.div`
     self-align: center;
 `
 
-const Landing = () => {
+const GoogleSignIn = styled.a`
+`
+
+const Landing = ({signInWithGoogle}) => {
     return (
         <Jumbo>   
             <Container>
@@ -32,7 +37,13 @@ const Landing = () => {
                     <img src={logo} alt="logo" />
                     <h3>Automate your websites</h3>
                     <p>Don't waste time opening the same websites every day.</p>
-                    <p>Tabinate the website and open all at once!</p>
+                    <p>Lets get started: </p>
+                    <a onClick={signInWithGoogle} href="#">
+                        <img 
+                            src={signIn} 
+                            alt="logo" 
+                        />
+                    </a>
                 </Message>
             </Container>        
         </Jumbo>

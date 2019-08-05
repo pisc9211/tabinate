@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 let UrlSchema = new Schema({
   url: String,
   checked: {type: Boolean, default: true},
+  title: String,
   date: {type: Date, default: Date.now()}
 })
 

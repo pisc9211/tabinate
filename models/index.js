@@ -35,9 +35,10 @@ let getUser = (uid) => {
 }
 
 let addUrl = (data) => {
-  let {url, uid} = data
+  let {url, uid, title} = data
   let newUrl = new Url({
-    url: url
+    url: url,
+    title: title
   })
   return User.updateOne({uid: uid}, {$push: {urls: newUrl}})
 }

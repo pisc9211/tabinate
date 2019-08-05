@@ -78,7 +78,7 @@ const Tabs = ({urls, openAll, getUrls, addUrl, deleteUrl, uid}) => {
             </Form>
             <OpenButton onClick={open}>Open Checked</OpenButton>
             <UrlDiv onSubmit={open}>
-                {urls && urls.length > 0 ? urls.map((url, i) => <CheckBox key={url._id} getUrls={getUrls} url={url.url} deleteUrl={deleteUrl} i={i} uid={uid} _id={url._id} isChecked={url.checked}/>) : 'No Urls Saved!!'}
+                {urls && urls.length > 0 ? urls.map((url, i) => <CheckBox title={url.title} key={url._id} getUrls={getUrls} url={url.url} deleteUrl={deleteUrl} i={i} uid={uid} _id={url._id} isChecked={url.checked}/>) : 'No Urls Saved!!'}
             </UrlDiv>
         </Div>
     )

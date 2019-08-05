@@ -55,9 +55,12 @@ const Name = styled.div`
     border-radius: 20px;
     margin: 0;
     padding: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 24px;
 `
 
-const CheckBox = ({url, _id, getUrls, deleteUrl, i, uid, isChecked}) => {
+const CheckBox = ({title, url, _id, getUrls, deleteUrl, i, uid, isChecked}) => {
 
     let handleOnChange = (e) => {
         updateCheckMark(_id, e.target.checked)
@@ -89,7 +92,8 @@ const CheckBox = ({url, _id, getUrls, deleteUrl, i, uid, isChecked}) => {
                 <img className="mx-2" src={imgUrl}></img>
             </A>
             <Name>
-                {url ? getDomain(url.match(/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/img).toString()): null}
+                    {/* {url ? getDomain(url.match(/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/img).toString()): null} */}
+                    {title}
             </Name>
             
         </Div>
