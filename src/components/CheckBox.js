@@ -17,11 +17,24 @@ const Div = styled.div`
 `
 
 const Close = styled.label`
+    display: block;
     position: absolute;
     top: 0;
     left: 0;
     width: 20px;
     height: 20px;
+`
+
+const Delete = styled.label`
+    position: absolute;
+    width: 20px;
+    height; 20px;
+    top: 0;
+    right: 0;
+    color: black;
+    :hover {
+        cursor: pointer;
+    }
 `
 
 const A = styled.a`
@@ -59,6 +72,10 @@ const CheckBox = ({url, _id, getUrls, deleteUrl, i, uid, isChecked}) => {
         }).then(() => getUrls())
     }
 
+    let handleDelete = () => {
+        deleteUrl(_id)
+    }
+
     let imgUrl = `http://s2.googleusercontent.com/s2/favicons?domain_url=${url}`
 
     return (
@@ -67,6 +84,7 @@ const CheckBox = ({url, _id, getUrls, deleteUrl, i, uid, isChecked}) => {
                 <input value={url} onChange={handleOnChange} checked={isChecked} className="check" type="checkbox"/>
                 <span className="checkmark"></span>
             </Close>
+            <Delete onClick={handleDelete}>x</Delete>
             <A>
                 <img className="mx-2" src={imgUrl}></img>
             </A>

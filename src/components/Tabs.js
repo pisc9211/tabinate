@@ -7,7 +7,6 @@ const Div = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: 1px solid blue;
 `
 
 const Form = styled.form`
@@ -70,7 +69,7 @@ const Tabs = ({urls, openAll, getUrls, addUrl, deleteUrl, uid}) => {
         e.preventDefault()
         openAll(getCheckedURL())
     }
-    
+
     return (
         <Div>
             <Form onSubmit={handleSubmit}>

@@ -31,7 +31,7 @@ app.post('/api/check', (req, res) => {
 })
 
 app.delete('/api', (req, res) => {
-  deleteUrl(req.body).then((d) => console.log('deleted url', d))
+  deleteUrl(req.query).then((d) => console.log('deleted url', d))
   res.send('deleted!')
 })
 
@@ -41,12 +41,6 @@ app.post('/title', async (req, res) => {
   let title = await getTitlePup(url)
   res.send(title)
 })
-
-
-// function findTitle(str) {
-//   const $ = cheerio.load(str)
-//   return $.html()
-// }
 
 async function getTitlePup(url) {
   const browser = await puppeteer.launch({ headless: true })

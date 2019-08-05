@@ -55,9 +55,10 @@ let updateCheck = (data) => {
 
 let deleteUrl = (data) => {
   let {uid, urlId} = data
-  return User.findOneAndDelete({
-    uid: uid, 'urls._id': urlId
-  }, (err) => console.error(err))
+  return User.updateOne(
+    { uid: uid},
+    { $pull: {urls: {_id: urlId}}},
+    (err) => console.error(err))
 }
 
 module.exports = {

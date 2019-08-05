@@ -27,11 +27,12 @@ function App({user, signOut, signInWithGoogle}) {
   }
 
   let deleteUrl = (urlId) => {
-    // axios.delete('/api', {
-    //   uid: user.uid,
-    //   urlId
-    // }).then(() => getUrls())
-    //   .catch(err => console.error(err))
+    console.log(user.uid, urlId)
+    axios.delete('/api', { params: {
+      uid: user.uid,
+      urlId: urlId
+    }}).then(() => getUrls())
+      .catch(err => console.error(err))
   }
 
   let getUrls = () => {
@@ -47,11 +48,20 @@ function App({user, signOut, signInWithGoogle}) {
   }, [user])
 
   return (
-    <Container>
+    <div style={style}>
       <NavBar user={user} signOut={signOut} signInWithGoogle={signInWithGoogle}/>
-      { user ? <Tabs urls={urls} openAll={openAll} getUrls={getUrls} addUrl={addUrl} deleteUrl={deleteUrl} uid={user.uid}/> : <Landing />}
-    </Container>
+      { user ? <Tabs urls={urls} openAll={openAll} getUrls={getUrls} addUrl={addUrl} deleteUrl={deleteUrl} uid={user.uid} /> : <Landing />}
+    </div>
   );
+}
+
+let style = {
+  height: '100vh',
+  width: '100vw',
+  display: 'flex',
+  flexDirection: 'column',
+  margin: '0 !important',
+  padding: 0
 }
 
 export default withFirebaseAuth({

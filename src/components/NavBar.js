@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav'
 
 const NavBar = ({user, signOut, signInWithGoogle}) => {
     return (
-        <Navbar variant="dark" bg="dark">
+        <Navbar variant="dark" bg="dark" style={{flex: '0 1 auto'}}>
             <Navbar.Brand href="/">Tabinate</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-start">
