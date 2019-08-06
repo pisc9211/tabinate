@@ -21,11 +21,15 @@ app.get('/api/:uid', (req, res) => {
 app.post('/api/url', async (req, res) => {
   let title = await getTitlePup(req.body.url)
   console.log('title from post', title)
-  let data = Object.assign({title}, req.body)
-  console.log('data from assigning', data)
-  addUrl(data)
-    .then((d) => res.send('added url!'))
-    .catch(err => res.send(err))
+  if (title === 'invalid url') {
+    res.send('invalid url')
+  } else {
+    let data = Object.assign({title}, req.body)
+    console.log('data from assigning', data)
+    addUrl(data)
+      .then((d) => res.send('added url!'))
+      .catch(err => res.send(err))
+  }
 })
 
 app.post('/api/check', (req, res) => {
@@ -49,7 +53,11 @@ app.post('/title', async (req, res) => {
 async function getTitlePup(url) {
   const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
-  await page.goto(url)
+  try {
+    await page.goto(url)
+  } catch {
+    return 'invalid url'
+  }
   await page.waitForSelector('title');
   const title = await page.title()
   await browser.close()
