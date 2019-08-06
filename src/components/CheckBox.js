@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import axios from 'axios'
 
 const Div = styled.div`
-    width: 130px;
-    height: 130px;
+    width: 150px;
+    height: 150px;
     border: 1px solid yellow;
     border-radius: 4px;
-    background-color: grey;
+    background-color: #333;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +31,7 @@ const Delete = styled.label`
     height; 20px;
     top: 0;
     right: 0;
-    color: black;
+    color: #fff;
     :hover {
         cursor: pointer;
     }
@@ -39,8 +39,8 @@ const Delete = styled.label`
 
 const A = styled.a`
     margin-top: 6px;
-    width: 48px;
-    height: 48px;
+    width: 55px;
+    height: 55px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,7 +89,7 @@ const CheckBox = ({title, url, _id, getUrls, deleteUrl, i, uid, isChecked}) => {
             </Close>
             <Delete onClick={handleDelete}>x</Delete>
             <A>
-                <img className="mx-2" src={imgUrl}></img>
+                <img alt="favicon" className="mx-2" src={imgUrl}></img>
             </A>
             <Name>
                     {/* {url ? getDomain(url.match(/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/img).toString()): null} */}

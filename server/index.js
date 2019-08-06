@@ -14,7 +14,9 @@ app.use(express.urlencoded({
 
 app.get('/api/:uid', (req, res) => {
   // getUser works~
-  getUser(req.params.uid).then(user => res.send(user))
+  getUser(req.params.uid)
+    .then(user => res.send(user))
+    .catch(e => res.send(e))
   // res.send(req.params.uid)
 })
 
@@ -43,23 +45,18 @@ app.delete('/api', (req, res) => {
   res.send('deleted!')
 })
 
-app.post('/title', async (req, res) => {
-  let url = req.body.url;
-  console.log('url', url)
-  let title = await getTitlePup(url)
-  res.send(title)
-})
-
 async function getTitlePup(url) {
   const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
   try {
     await page.goto(url)
   } catch {
+    await browser.close()
     return 'invalid url'
   }
   await page.waitForSelector('title');
   const title = await page.title()
+  
   await browser.close()
   return title
 }

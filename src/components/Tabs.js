@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Alert from 'react-bootstrap/Alert'
 import CheckBox from './CheckBox'
 import styled from 'styled-components'
 
@@ -7,6 +8,8 @@ const Div = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    background-color: #f0f8ff;
+    flex: 1 1 auto;
 `
 
 const Form = styled.form`
@@ -15,7 +18,7 @@ const Form = styled.form`
 
 const Input = styled.input`
     width: 55%;
-    height: 2em;
+    height: 2.5em;
     border: 2px solid grey;
     padding: 4px;
 
@@ -25,7 +28,7 @@ const Input = styled.input`
 `
 
 const Button = styled.button`
-    height: 2em;
+    height: 2.5em;
     background-color: black;
     border-radius: 4px;
     color: white;
@@ -48,7 +51,7 @@ const OpenButton = styled.button`
     background-color: #50c878;
 `
 
-const Tabs = ({urls, openAll, getUrls, addUrl, deleteUrl, uid}) => {
+const Tabs = ({urls, openAll, getUrls, addUrl, deleteUrl, uid, show, updateShow}) => {
     let [url, updateUrl] = useState('')
 
     let handleOnChange = (e) => {
@@ -75,13 +78,21 @@ const Tabs = ({urls, openAll, getUrls, addUrl, deleteUrl, uid}) => {
             <Form onSubmit={handleSubmit}>
                 <Input value={url} onChange={handleOnChange} type="text" placeholder="add url"/>
                 <Button>Add URL</Button>
+                { show ? <Alert style={alertStyle} className="mx-auto" variant='danger' onClose={() => updateShow(false)} dismissible>Invalid url</Alert> : null}
             </Form>
             <OpenButton onClick={open}>Open Checked</OpenButton>
             <UrlDiv onSubmit={open}>
-                {urls && urls.length > 0 ? urls.map((url, i) => <CheckBox title={url.title} key={url._id} getUrls={getUrls} url={url.url} deleteUrl={deleteUrl} i={i} uid={uid} _id={url._id} isChecked={url.checked}/>) : 'No Urls Saved!!'}
+                {urls && urls.length > 0 ? urls.map((url, i) => <CheckBox title={url.title} key={url._id} getUrls={getUrls} url={url.url} deleteUrl={deleteUrl} i={i} uid={uid} _id={url._id} isChecked={url.checked}/>) : 'Add url!'}
             </UrlDiv>
         </Div>
     )
+}
+
+let alertStyle = {
+    width: '60%',
+    position: 'absolute',
+    bottom: 0,
+    left: '20%',
 }
 
 let validateURL = url => {
