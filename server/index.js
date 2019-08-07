@@ -50,15 +50,15 @@ async function getTitlePup(url) {
   const page = await browser.newPage()
   try {
     await page.goto(url)
+    await page.waitForSelector('title');
+    const title = await page.title()
+    
+    await browser.close()
+    return title
   } catch {
     await browser.close()
     return 'invalid url'
   }
-  await page.waitForSelector('title');
-  const title = await page.title()
-  
-  await browser.close()
-  return title
 }
 
 app.listen(4000, () => console.log(`listening to port 4000`))

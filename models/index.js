@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('./Users')
 const Url = require('./Url').Url
 
-mongoose.connect(`mongodb://${process.env.MONGODB_USERNAME || 'root'}:${process.env.MONGODB_PASSWORD || 'password123'}@ds139705.mlab.com:39705/tabinate`,
+mongoose.connect(`mongodb://${process.env.MONGODB_USERNAME || 'root'}:${process.env.MONGODB_PASSWORD || 'password123'}@ds259787.mlab.com:59787/tabinate`,
   {
     useNewUrlParser: true, 
     useFindAndModify: false

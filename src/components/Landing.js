@@ -38,7 +38,7 @@ const Landing = ({signInWithGoogle}) => {
                     <h3>Automate your websites</h3>
                     <p>Don't waste time opening the same websites every day.</p>
                     <p>Lets get started: </p>
-                    <a onClick={signInWithGoogle} href="#">
+                    <a onClick={signInWithGoogle} href="/">
                         <img 
                             src={signIn} 
                             alt="logo" 
