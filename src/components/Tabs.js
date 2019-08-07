@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import { connect } from 'react-redux'
+import { addUrl, getUrls, toggleLoading } from '../actions'
 import Alert from 'react-bootstrap/Alert'
 import CheckBox from './CheckBox'
 import styled from 'styled-components'
@@ -51,7 +53,8 @@ const OpenButton = styled.button`
     background-color: #50c878;
 `
 
-const Tabs = ({urls, openAll, getUrls, addUrl, deleteUrl, uid, show, updateShow}) => {
+const Tabs = ({urls, openAll, addUrl, getUrls, deleteUrl, uid, show, updateShow, toggleLoading}) => {
+    console.log('urls', urls, 'addurl', addUrl)
     let [url, updateUrl] = useState('')
 
     let handleOnChange = (e) => {
@@ -60,6 +63,7 @@ const Tabs = ({urls, openAll, getUrls, addUrl, deleteUrl, uid, show, updateShow}
     }
     let handleSubmit = (e) => {
         e.preventDefault()
+        toggleLoading(true)
         addUrl(validateURL(url))
         updateUrl('')
     }
@@ -97,9 +101,13 @@ let alertStyle = {
 
 let validateURL = url => {
     if (url.substr(0, 4) !== 'http') {
-        return 'http://' + url
+        return 'https://' + url
     }
     return url
 }
 
-export default Tabs
+const mapStateToProps = (state) => {
+    return { urls : state.url.urls}
+}
+
+export default connect(mapStateToProps, {addUrl, getUrls, toggleLoading})(Tabs)
