@@ -7,9 +7,9 @@ const updateCheck = require('../models').updateCheck
 const puppeteer = require('puppeteer')
 const path = require('path')
 
-app.use(express.static(path.join(__dirname, 'client/build')))
+app.use(express.static(path.join(__dirname, '/../build')))
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+  res.sendFile(path.join(__dirname + '/../build/index.html'))
 })
 
 app.use(express.json())
@@ -17,7 +17,7 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-app.get('testing', (req, res) => res.send('you getting the server!!!!'))
+app.get('/testing', (req, res) => res.send('you getting the testinggg'))
 
 app.get('/api/:uid', (req, res) => {
   // getUser works~
