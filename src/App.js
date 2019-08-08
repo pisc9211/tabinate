@@ -78,7 +78,7 @@ function App({user, signOut, signInWithGoogle}) {
   
   useEffect(() => {
     console.log('useEffect going to get urls')
-    axios.get('/test').then(d => console.log(d)).catch(e => console.error(e))
+    axios.get('/testing').then(d => console.log(d)).catch(e => console.error(e))
     getUrls()
   }, [user])
 

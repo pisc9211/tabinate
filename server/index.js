@@ -7,17 +7,15 @@ const updateCheck = require('../models').updateCheck
 const puppeteer = require('puppeteer')
 const path = require('path')
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/../build')))
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../build/index.html'))
-  })
-}
-
 app.use(express.json())
 app.use(express.urlencoded({
   extended: true
 }))
+// if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/../build')))
+  
+// }
+
 
 app.get('/testing', (req, res) => res.send('you getting the testinggg'))
 
@@ -52,6 +50,10 @@ app.post('/api/check', (req, res) => {
 app.delete('/api', (req, res) => {
   deleteUrl(req.query).then((d) => console.log('deleted url', d))
   res.send('deleted!')
+})
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/../build/index.html'))
 })
 
 async function getTitlePup(url) {

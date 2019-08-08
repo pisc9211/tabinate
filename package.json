@@ -20,10 +20,11 @@
   },
   "scripts": {
     "start": "node server/index.js",
+    "start:dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"npm start\" \"npx nodemon server\""
+    "dev": "concurrently \"npm start:dev\" \"npx nodemon server\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,6 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:4000"
+  }
 }
