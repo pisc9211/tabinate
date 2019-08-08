@@ -25,8 +25,7 @@ app.get('/api/:uid', (req, res) => {
 })
 
 app.post('/api/url', async (req, res) => {
-  // let title = await getTitlePup(req.body.url)
-  let title = req.body.url
+  let title = await getTitlePup(req.body.url)
   console.log('title from post', title)
   if (title === 'invalid url') {
     res.send('invalid url')
@@ -56,7 +55,12 @@ app.use(express.static(path.join(__dirname, '/../build')))
 // })
 
 async function getTitlePup(url) {
-  const browser = await puppeteer.launch({ headless: true })
+  const browser = await puppeteer.launch({
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+    ]
+  })
   const page = await browser.newPage()
   try {
     await page.goto(url)
