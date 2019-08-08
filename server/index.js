@@ -7,10 +7,12 @@ const updateCheck = require('../models').updateCheck
 const puppeteer = require('puppeteer')
 const path = require('path')
 
-app.use(express.static(path.join(__dirname, '/../build')))
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/../build/index.html'))
-})
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/../build')))
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../build/index.html'))
+  })
+}
 
 app.use(express.json())
 app.use(express.urlencoded({
