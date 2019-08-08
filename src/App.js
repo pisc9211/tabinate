@@ -14,8 +14,6 @@ function App({user, signOut, signInWithGoogle}) {
   let [urls, updateUrls] = useState([]);
   let [loading, updateLoading] = useState(true);
   let [show, updateShow] = useState(false)
-  console.log(signInWithGoogle, 'signInWithGoogle')
-  console.log('userrrr', user)
   
   let addUrl = async (url) => {
     updateLoading(true);
@@ -82,8 +80,6 @@ function App({user, signOut, signInWithGoogle}) {
   }
   
   useEffect(() => {
-    console.log('useEffect going to get urls')
-    axios.get('/testing').then(d => console.log(d)).catch(e => console.error(e))
     getUrls()
   }, [user])
 

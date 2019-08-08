@@ -12,10 +12,6 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-
-
-app.get('/testing', (req, res) => res.send(getTitlePup(req.body.url)))
-
 app.get('/api/:uid', (req, res) => {
   // getUser works~
   getUser(req.params.uid)

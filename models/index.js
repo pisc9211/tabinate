@@ -5,7 +5,7 @@ const Url = require('./Url').Url
 mongoose.connect(`mongodb://${process.env.MONGODB_USERNAME || 'root'}:${process.env.MONGODB_PASSWORD || 'password123'}@ds259787.mlab.com:59787/tabinate`,
   {
     useNewUrlParser: true, 
-    useFindAndModify: false
+    useFindAndModify: false,
   }
 );
 
