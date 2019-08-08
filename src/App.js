@@ -14,6 +14,7 @@ function App({user, signOut, signInWithGoogle}) {
   let [urls, updateUrls] = useState([]);
   let [loading, updateLoading] = useState(true);
   let [show, updateShow] = useState(false)
+  console.log(signInWithGoogle, 'signInWithGoogle')
   console.log('userrrr', user)
   let addUrl = async (url) => {
     updateLoading(true);
