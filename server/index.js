@@ -52,9 +52,9 @@ app.delete('/api', (req, res) => {
   res.send('deleted!')
 })
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/../build/index.html'))
-})
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname + '/../build/index.html'))
+// })
 
 async function getTitlePup(url) {
   const browser = await puppeteer.launch({ headless: true })
