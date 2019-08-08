@@ -5,7 +5,12 @@ const addUrl = require('../models').addUrl
 const deleteUrl = require('../models').deleteUrl
 const updateCheck = require('../models').updateCheck
 const puppeteer = require('puppeteer')
-const axios = require('axios')
+const path = require('path')
+
+app.use(express.static(path.join(__dirname, 'client/build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
 
 app.use(express.json())
 app.use(express.urlencoded({
