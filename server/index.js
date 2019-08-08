@@ -68,4 +68,4 @@ async function getTitlePup(url) {
   }
 }
 
-app.listen(process.env.PORT || 4000, () => console.log(`listening to port 4000`))
+app.listen(process.env.PORT || 4000, () => console.log(`listening to port ${process.env.PORT || 4000}`))
