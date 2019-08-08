@@ -55,7 +55,7 @@ app.use(express.static(path.join(__dirname, '/../build')))
 // })
 
 async function getTitlePup(url) {
-  const browser = await puppeteer.launch({ headless: true })
+  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] })
   const page = await browser.newPage()
   try {
     await page.goto(url)
