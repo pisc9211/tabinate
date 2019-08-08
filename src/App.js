@@ -16,6 +16,7 @@ function App({user, signOut, signInWithGoogle}) {
   let [show, updateShow] = useState(false)
   console.log(signInWithGoogle, 'signInWithGoogle')
   console.log('userrrr', user)
+  
   let addUrl = async (url) => {
     updateLoading(true);
     axios.post(`/api/url`, {url, uid: user.uid })
@@ -29,7 +30,10 @@ function App({user, signOut, signInWithGoogle}) {
              updateShow(false)
            }
          })
-         .catch(err => console.error(err))
+         .catch(err => {
+           console.error(err)
+           updateLoading(false);
+          })
   }
 
   let openAll = (urlArr) => {
