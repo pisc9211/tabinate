@@ -11,10 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({
   extended: true
 }))
-// if (process.env.NODE_ENV === 'production') {
-  
-  
-// }
+
 
 
 app.get('/testing', (req, res) => res.send('you getting the testinggg'))
