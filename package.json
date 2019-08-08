@@ -20,11 +20,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && node server",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"npm start\" \"npx nodemon server\"",
-    "heroku-postbuild": "node server"
+    "dev": "concurrently \"npm start\" \"npx nodemon server\""
   },
   "eslintConfig": {
     "extends": "react-app"
