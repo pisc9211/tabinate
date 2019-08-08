@@ -14,7 +14,7 @@ app.use(express.urlencoded({
 
 
 
-app.get('/testing', (req, res) => res.send('you getting the testinggg'))
+app.get('/testing', (req, res) => res.send(getTitlePup(req.body.url)))
 
 app.get('/api/:uid', (req, res) => {
   // getUser works~
@@ -25,7 +25,8 @@ app.get('/api/:uid', (req, res) => {
 })
 
 app.post('/api/url', async (req, res) => {
-  let title = await getTitlePup(req.body.url)
+  // let title = await getTitlePup(req.body.url)
+  let title = req.body.url
   console.log('title from post', title)
   if (title === 'invalid url') {
     res.send('invalid url')
@@ -68,6 +69,7 @@ async function getTitlePup(url) {
     await browser.close()
     return 'invalid url'
   }
+  // return url
 }
 
 app.listen(process.env.PORT || 4000, () => console.log(`listening to port ${process.env.PORT || 4000}`))
