@@ -51,7 +51,10 @@ function App({user, signOut, signInWithGoogle}) {
       console.log('user', user)
       try {
         axios.get(`/api/${user.uid}`)
-             .then(({data}) => updateUrls(data[0].urls))
+             .then(({data}) => {
+               console.log(data[0].urls)
+               updateUrls(data[0].urls)
+              })
              .then(() => setTimeout(() => updateLoading(false), 1000))
              .catch(err => console.error(err))
       } catch (e) {
