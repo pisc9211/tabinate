@@ -22,7 +22,7 @@ app.get('/testing', (req, res) => res.send('you getting the testinggg'))
 app.get('/api/:uid', (req, res) => {
   // getUser works~
   getUser(req.params.uid)
-    .then(user => res.send(user))
+    .then(user => res.json(user))
     .catch(e => res.send(e))
   // res.send(req.params.uid)
 })
