@@ -17,6 +17,8 @@ app.use(express.urlencoded({
   extended: true
 }))
 
+app.get('testing', (req, res) => res.send('you getting the server!!!!'))
+
 app.get('/api/:uid', (req, res) => {
   // getUser works~
   getUser(req.params.uid)

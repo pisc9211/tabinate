@@ -14,7 +14,7 @@ function App({user, signOut, signInWithGoogle}) {
   let [urls, updateUrls] = useState([]);
   let [loading, updateLoading] = useState(true);
   let [show, updateShow] = useState(false)
-
+  console.log('userrrr', user)
   let addUrl = async (url) => {
     updateLoading(true);
     axios.post(`/api/url`, {url, uid: user.uid })
@@ -48,7 +48,7 @@ function App({user, signOut, signInWithGoogle}) {
 
   let getUrls = () => {
     if (user) {
-      console.log('user', user)
+      console.log('user inside getUrls', user)
       try {
         axios.get(`/api/${user.uid}`)
              .then(({data}) => {
@@ -78,6 +78,7 @@ function App({user, signOut, signInWithGoogle}) {
   
   useEffect(() => {
     console.log('useEffect going to get urls')
+    axios.get('/test').then(d => console.log(d)).catch(e => console.error(e))
     getUrls()
   }, [user])
 
