@@ -42,7 +42,7 @@ function App({user, signOut, signInWithGoogle}) {
   }
 
   let deleteUrl = (urlId) => {
-    let uid = demo ? demo.url : user.uid
+    let uid = demo ? demo.uid : user.uid
     axios.delete('/api', { params: {
       uid,
       urlId: urlId
