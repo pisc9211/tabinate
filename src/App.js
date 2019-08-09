@@ -14,10 +14,12 @@ function App({user, signOut, signInWithGoogle}) {
   let [urls, updateUrls] = useState([]);
   let [loading, updateLoading] = useState(true);
   let [show, updateShow] = useState(false)
+  let [demo, updateDemo] = useState(null)
   
   let addUrl = async (url) => {
     updateLoading(true);
-    axios.post(`/api/url`, {url, uid: user.uid })
+    let uid = demo ? demo.uid : user.uid
+    axios.post(`/api/url`, {url, uid })
          .then(d => {
            console.log(d)
            if (d.data === 'invalid url') {
@@ -42,18 +44,20 @@ function App({user, signOut, signInWithGoogle}) {
 
   let deleteUrl = (urlId) => {
     console.log(user.uid, urlId)
+    let uid = demo ? demo.url : user.uid
     axios.delete('/api', { params: {
-      uid: user.uid,
+      uid,
       urlId: urlId
     }}).then(() => getUrls())
       .catch(err => console.error(err))
   }
 
   let getUrls = () => {
-    if (user) {
-      console.log('user inside getUrls', user)
+    if (demo || user) {
+      console.log('user inside getUrls', demo, user)
+      let uid = demo ? demo.uid : user.uid
       try {
-        axios.get(`/api/${user.uid}`)
+        axios.get(`/api/${uid}`)
              .then(({data}) => {
                console.log(data[0].urls)
                updateUrls(data[0].urls)
@@ -63,7 +67,8 @@ function App({user, signOut, signInWithGoogle}) {
       } catch (e) {
         console.log('status', e.status)
         try {
-          axios.get(`/api/${user.uid}`)
+          let uid = demo ? demo.uid : user.uid
+          axios.get(`/api/${uid}`)
              .then(({data}) => updateUrls(data[0].urls))
              .then(() => console.log(urls))
              .then(() => setTimeout(() => updateLoading(false), 1000))
@@ -78,16 +83,24 @@ function App({user, signOut, signInWithGoogle}) {
       updateLoading(false)
     }
   }
+
+  let demoLogIn = async () => {
+      await updateDemo({
+        uid: 'demouser',
+        photoURL: 'https://static.thenounproject.com/png/363633-200.png'
+      });
+      getUrls()
+  }
   
   useEffect(() => {
     getUrls()
-  }, [user])
+  }, [user, demo])
 
   return (
     loading ? <Loader /> : 
     <div style={style}>
-      <NavBar user={user} signOut={signOut} signInWithGoogle={signInWithGoogle}/>
-      { user ? 
+      <NavBar user={demo !== null ? demo : user} signOut={signOut} signInWithGoogle={signInWithGoogle} updateDemo={updateDemo} demoLogIn={demoLogIn}/>
+      { demo || user ? 
         <Tabs 
           show={show} 
           updateShow={updateShow} 
@@ -96,7 +109,7 @@ function App({user, signOut, signInWithGoogle}) {
           getUrls={getUrls} 
           addUrl={addUrl} 
           deleteUrl={deleteUrl} 
-          uid={user.uid} 
+          uid={demo !== null ? demo.uid : user.uid} 
         /> : 
         <Landing 
           signInWithGoogle={signInWithGoogle}
