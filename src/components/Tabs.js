@@ -65,7 +65,6 @@ const Tabs = ({urls, openAll, getUrls, addUrl, deleteUrl, uid, show, updateShow}
     }
     let getCheckedURL = () => {
         let arr = document.getElementsByClassName('check')
-        console.log('checkedurl', arr)
         return [...arr].filter(el => el.checked).map(el => el.value)
     }
     let open = (e) => {

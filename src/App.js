@@ -21,7 +21,6 @@ function App({user, signOut, signInWithGoogle}) {
     let uid = demo ? demo.uid : user.uid
     axios.post(`/api/url`, {url, uid })
          .then(d => {
-           console.log(d)
            if (d.data === 'invalid url') {
              updateLoading(false)
              updateShow(true)
@@ -43,7 +42,6 @@ function App({user, signOut, signInWithGoogle}) {
   }
 
   let deleteUrl = (urlId) => {
-    console.log(user.uid, urlId)
     let uid = demo ? demo.url : user.uid
     axios.delete('/api', { params: {
       uid,
@@ -54,28 +52,23 @@ function App({user, signOut, signInWithGoogle}) {
 
   let getUrls = () => {
     if (demo || user) {
-      console.log('user inside getUrls', demo, user)
       let uid = demo ? demo.uid : user.uid
       try {
         axios.get(`/api/${uid}`)
              .then(({data}) => {
-               console.log(data[0].urls)
                updateUrls(data[0].urls)
               })
              .then(() => setTimeout(() => updateLoading(false), 1000))
              .catch(err => console.error(err))
       } catch (e) {
-        console.log('status', e.status)
         try {
           let uid = demo ? demo.uid : user.uid
           axios.get(`/api/${uid}`)
              .then(({data}) => updateUrls(data[0].urls))
-             .then(() => console.log(urls))
              .then(() => setTimeout(() => updateLoading(false), 1000))
              .catch(err => console.error(err))
         } catch {
           updateLoading(false)
-          console.log(e.status)
           console.error(e)
         }
       }

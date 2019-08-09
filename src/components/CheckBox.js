@@ -67,7 +67,6 @@ const CheckBox = ({title, url, _id, getUrls, deleteUrl, i, uid, isChecked}) => {
     }
 
     let updateCheckMark = (id, checked) => {
-        console.log(id, checked, uid)
         axios.post('/api/check', {
             uid: uid,
             urlId: id,
