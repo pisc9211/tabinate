@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import logo from '../images/tabinate.png'
 import signIn from '../images/btn_google_signin_dark_normal_web.png'
-import press from '../images/btn_google_signin_dark_pressed_web.png'
 
 const Jumbo = styled.div`
     display: flex;
