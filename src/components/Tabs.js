@@ -80,7 +80,7 @@ const Tabs = ({urls, openAll, getUrls, addUrl, deleteUrl, uid, show, updateShow}
                 <Button>Add URL</Button>
                 { show ? <Alert style={alertStyle} className="mx-auto" variant='danger' onClose={() => updateShow(false)} dismissible>Invalid url</Alert> : null}
             </Form>
-            <OpenButton onClick={open}>Open Checked</OpenButton>
+            <OpenButton onClick={open}>Tabinate Em</OpenButton>
             <UrlDiv onSubmit={open}>
                 {urls && urls.length > 0 ? urls.map((url, i) => <CheckBox title={url.title} key={url._id} getUrls={getUrls} url={url.url} deleteUrl={deleteUrl} i={i} uid={uid} _id={url._id} isChecked={url.checked}/>) : 'Add url!'}
             </UrlDiv>
